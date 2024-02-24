@@ -1,6 +1,4 @@
-import { BuildOptions } from '../types/types';
-
-export function buildBabelLoader({ mode }: BuildOptions) {
+function buildBabelLoader({ mode }) {
     const isDev = mode === 'development';
     const plugins = [];
     if (isDev) {
@@ -18,3 +16,5 @@ export function buildBabelLoader({ mode }: BuildOptions) {
         },
     };
 }
+
+module.exports = { buildBabelLoader };

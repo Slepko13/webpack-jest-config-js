@@ -1,17 +1,8 @@
-import { resolve } from 'path';
+const { resolve } = require('path');
 
-import { buildWebpack } from './config/build/build-webpack';
-import { BuildMode, BuildPlatform } from './config/build/types/types';
+const { buildWebpack } = require('./config/build/build-webpack');
 
-import type { Configuration } from 'webpack';
-
-interface EnvVariables {
-    mode?: BuildMode;
-    port?: number;
-    platform?: BuildPlatform;
-}
-
-export default (env: EnvVariables) => {
+module.exports = (env) => {
     const paths = {
         output: resolve(__dirname, 'build'),
         entry: resolve(__dirname, 'index.jsx'),
@@ -19,7 +10,7 @@ export default (env: EnvVariables) => {
         favicon: resolve(__dirname, 'public', 'test-favicon.png'),
     };
 
-    const config: Configuration = buildWebpack({
+    const config = buildWebpack({
         target: env.mode === 'production' ? 'browserslist' : 'web',
         mode: env.mode === 'production' ? 'production' : 'development',
         port: env.port ?? 3000,

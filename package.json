@@ -1,7 +1,7 @@
 {
-    "name": "react-frontend",
+    "name": "webpack-jest-config",
     "version": "1.0.0",
-    "description": "",
+    "description": "basic webpack and jest config (works with ts)",
     "main": "index.js",
     "scripts": {
         "start": "webpack serve --open --hot --mode=development",

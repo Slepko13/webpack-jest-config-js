@@ -1,17 +1,14 @@
-import type { Configuration } from 'webpack';
+const { buildDevServer } = require('./build-dev-server');
+const { buildLoaders } = require('./build-loaders');
+const { buildPlugins } = require('./build-plugins');
+const { buildResolvers } = require('./build-resolvers');
 
-import { buildDevServer } from './build-dev-server';
-import { buildLoaders } from './build-loaders';
-import { buildPlugins } from './build-plugins';
-import { buildResolvers } from './build-resolvers';
-import { BuildOptions } from './types/types';
-
-export function buildWebpack(options: BuildOptions): Configuration {
+function buildWebpack(options) {
     const { mode, paths, target } = options;
     const isDev = mode === 'development';
 
     return {
-        mode: mode ?? mode,
+        mode: mode || mode,
         target,
 
         entry: paths.entry,
@@ -33,8 +30,10 @@ export function buildWebpack(options: BuildOptions): Configuration {
         module: {
             rules: buildLoaders(options),
         },
-        resolve: buildResolvers(options),
+        resolve: buildResolvers(),
         devtool: isDev ? 'inline-source-map' : false,
         devServer: isDev ? buildDevServer(options) : undefined,
     };
 }
+
+module.exports = { buildWebpack };

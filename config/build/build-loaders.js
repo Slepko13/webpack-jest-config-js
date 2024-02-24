@@ -1,9 +1,7 @@
-import { ModuleOptions } from 'webpack';
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import { BuildOptions } from './types/types';
-import { buildBabelLoader } from './babel/buildBabelLoader';
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { buildBabelLoader } = require('./babel/buildBabelLoader');
 
-export function buildLoaders(options: BuildOptions): ModuleOptions['rules'] {
+function buildLoaders(options) {
     const isDev = options.mode === 'development';
 
     const cssModuleLoader = {
@@ -55,7 +53,7 @@ export function buildLoaders(options: BuildOptions): ModuleOptions['rules'] {
         ],
     };
     const stylesModuleLoader = {
-        test: /\.module.(s[ac]|c)ss$/i,
+        test: /\.module\.(s[ac]|c)ss$/i,
         use: [
             isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
             cssModuleLoader,
@@ -64,11 +62,6 @@ export function buildLoaders(options: BuildOptions): ModuleOptions['rules'] {
         ],
     };
     const babelLoader = buildBabelLoader(options);
-    // const tsLoader = {
-    //     test: /\.tsx?$/,
-    //     use: 'ts-loader',
-    //     exclude: /node_modules/,
-    // };
 
     return [
         imageLoader,
@@ -77,6 +70,7 @@ export function buildLoaders(options: BuildOptions): ModuleOptions['rules'] {
         stylesSimpleLoader,
         stylesModuleLoader,
         babelLoader,
-        // tsLoader,
     ];
 }
+
+module.exports = { buildLoaders };
