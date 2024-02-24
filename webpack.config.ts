@@ -8,7 +8,6 @@ import type { Configuration } from 'webpack';
 interface EnvVariables {
     mode?: BuildMode;
     port?: number;
-    analyzer?: boolean;
     platform?: BuildPlatform;
 }
 
@@ -24,8 +23,7 @@ export default (env: EnvVariables) => {
         target: env.mode === 'production' ? 'browserslist' : 'web',
         mode: env.mode === 'production' ? 'production' : 'development',
         port: env.port ?? 3000,
-        analyzer: env.analyzer,
-        platform: env.platform ?? 'desktop',
+        platform: env.platform ?? 'production',
         paths,
     });
 

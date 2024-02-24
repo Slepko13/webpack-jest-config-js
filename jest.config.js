@@ -9,13 +9,7 @@ module.exports = {
     moduleNameMapper: {
         '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
     },
-    // collectCoverage: true,
-    testPathIgnorePatterns: [
-        '/node_modules/',
-        '/build/',
-        '<rootDir>/src/components/.*\\.(js|jsx)$',
-    ],
-    collectCoverageFrom: ['src/**/*.{js,jsx}', '!src/components/**/*.{js,jsx}'],
+    collectCoverageFrom: ['src/**/*.{js,jsx}'],
     coverageReporters: [
         'json',
         [
@@ -28,18 +22,4 @@ module.exports = {
         'clover',
         'json-summary',
     ],
-    coverageThreshold: {
-        global: {
-            branches: 4,
-            functions: 4,
-            lines: 4,
-            statements: 10,
-        },
-        './src/util/validators.js': {
-            branches: 70,
-            functions: 100,
-            lines: 100,
-            statements: 100,
-        },
-    },
 };

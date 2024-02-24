@@ -11,6 +11,10 @@ export const App = () => {
     return (
         <div className={classes.container}>
             <h1>Webpack JS config + Jest config</h1>
+            <div>Platform(production | stage | test): {__PLATFORM__}</div>
+            <br />
+            <div>Mode(production | development): {__MODE__}</div>
+            <br />
             <button className={classes.button} onClick={increment}>
                 Count {count}
             </button>
